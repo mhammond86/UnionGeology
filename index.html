@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 09 Template</title>
+    <title>Union Surficial Geology</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -77,22 +77,28 @@
       
       tiles.addTo(map);
         
-        $.getJSON("unionprojected1.geojson", function(data){
+        $.getJSON("union_trimmed.geojson", function(data){
         
        L.geoJson( data, {
-//    style: function(feature){
-//      var fillColor,
-//          Label = feature.properties.Label;
-//      if ( Label = Qr ) fillColor = "#006837";
-//      else if ( Label = Qal ) fillColor = "#31a354";
-//      else if ( Label = Qaf ) fillColor = "#78c679";
-//      else if ( Label = Qc ) fillColor = "#c2e699";
-//      else if ( Label = af1 ) fillColor = "#ffffcc";
-//      else if ( Label = Qalo ) fillColor = "#fffdbc";
-//      else fillColor = "#f7f7f7";  // no data
-//      return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .6 };
-//    },
-//           
+            style: function(feature){
+              var fillColor,
+                  label = feature.properties.Label;
+            
+              if ( label == 'Qr' ) fillColor = "#006837";
+              else if ( label == 'Qal' ) fillColor = "#31a354";
+              else if ( label == 'Qaf' ) fillColor = "#78c679";
+              else if ( label == 'Qc' ) fillColor = "#c2e699";
+              else if ( label == 'af1' ) fillColor = "#ffffcc";
+              else if ( label == 'Qalo' ) fillColor = "#fffdbc";
+              else fillColor = "#f7f7f7";  // no data
+              return { 
+                  color: "#999", 
+                  weight: 1, 
+                  fillColor: fillColor, 
+                  fillOpacity: .6 
+              };
+            }
+          
         }).addTo(map);
             
         });
