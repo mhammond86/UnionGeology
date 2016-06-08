@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lab 09 Template</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #001323;
+        }
+        h2 {
+            display: inline-block;
+            color: #001323;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            color: #001323;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Union Surficial Geology</h1>
+        <h2>Surficial Geology of the Union, KY Quadrangle.</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by Max Hammond III</p>
+        <p>Surficial Geology of the Union, KY Quadrangle.</p>
+    </footer>
+
+    <script src="unionprojected1.geojson"></script>
+    <script>
+
+       var map = L.map('map', {
+          center: [38.945,-84.68],
+          zoom: 10,
+      });
+      
+      var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+          subdomains: 'abcd',
+          maxZoom: 15
+      });  
+      
+      tiles.addTo(map);
+        
+        $.getJSON("unionprojected1.geojson", function(data){
+        
+       L.geoJson( data, {
+//    style: function(feature){
+//      var fillColor,
+//          Label = feature.properties.Label;
+//      if ( Label = Qr ) fillColor = "#006837";
+//      else if ( Label = Qal ) fillColor = "#31a354";
+//      else if ( Label = Qaf ) fillColor = "#78c679";
+//      else if ( Label = Qc ) fillColor = "#c2e699";
+//      else if ( Label = af1 ) fillColor = "#ffffcc";
+//      else if ( Label = Qalo ) fillColor = "#fffdbc";
+//      else fillColor = "#f7f7f7";  // no data
+//      return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .6 };
+//    },
+//           
+        }).addTo(map);
+            
+        });
+
+        
+        
+        
+            
+    </script>
+    
+</body>
+
+</html>
