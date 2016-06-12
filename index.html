@@ -89,9 +89,9 @@
     driftLayer: {source:"Qgd", color:'#B8860B'},
 };
         
-        $.getJSON("union_trimmed.geojson", function(data){
+    $.getJSON("union_trimmed.geojson", function(data){
         
-       L.geoJson( label, {
+       L.geoJson( data, {
             style: function(feature){
               var fillColor,
                   label = feature.properties.Label;
@@ -116,19 +116,19 @@
           
         }).addTo(map);
             
-            var sourcesLabels = {
-      "<b style='color:#FF7F50'>Residuum</b>": geoJsonLayers.residuumLayer,
-      "<b style='color:#9932CC'>Alluvium</b>": geoJsonLayers.alluviumLayer,
-      "<b style='color:#FF6347'>Alluvial Fan</b>": geoJsonLayers.fanLayer,
-      "<b style='color:#F0E68C'>Terrace</b>": geoJsonLayers.terraceLayer,
-      "<b style='color:#D2B48C'>Colluvium</b>": geoJsonLayers.colluviumLayer,
-      "<b style='color:#808080'>Artificial Fill</b>": geoJsonLayers.fillLayer,
-      "<b style='color:#FFFF00'>Older Alluvium</b>": geoJsonLayers.oldAlluviumLayer,
-      "<b style='color:#808000'>Glacial Outwash</b>": geoJsonLayers.outwashLayer,
-      "<b style='color:#B8860B'>Glacial Drift</b>": geoJsonLayers.driftLayer,
-}
+//        var sourcesLabels = {
+//      "<b style='color:#FF7F50'>Residuum</b>": geoJsonLayers.residuumLayer,
+//      "<b style='color:#9932CC'>Alluvium</b>": geoJsonLayers.alluviumLayer,
+//      "<b style='color:#FF6347'>Alluvial Fan</b>": geoJsonLayers.fanLayer,
+//      "<b style='color:#F0E68C'>Terrace</b>": geoJsonLayers.terraceLayer,
+//      "<b style='color:#D2B48C'>Colluvium</b>": geoJsonLayers.colluviumLayer,
+//      "<b style='color:#808080'>Artificial Fill</b>": geoJsonLayers.fillLayer,
+//      "<b style='color:#FFFF00'>Older Alluvium</b>": geoJsonLayers.oldAlluviumLayer,
+//      "<b style='color:#808000'>Glacial Outwash</b>": geoJsonLayers.outwashLayer,
+//      "<b style='color:#B8860B'>Glacial Drift</b>": geoJsonLayers.driftLayer,
+//}
 
-L.control.layers(null, sourcesLabels, { collapsed:false }).addTo(map);
+// L.control.layers(null, sourcesLabels, { collapsed:false }).addTo(map);
             
         });
 
