@@ -77,61 +77,67 @@
       
       tiles.addTo(map);
         
-//         var layerInfo = {
-//    residuumLayer: {source:"Qr", color:'#FF7F50'}, 
-//    alluviumLayer: {source:"Qal", color:'#9932CC'},
-//    fanLayer: {source:"Qaf", color:'#FF6347'},
-//    terraceLayer: {source:"Qat", color:'#F0E68C'},
-//    colluviumLayer: {source:"Qc", color:'#D2B48C'}, 
-//    fillLayer: {source:"af1", color:'#808080'},
-//    oldAlluviumLayer: {source:"Qalo", color:'#FFFF00'},
-//    outwashLayer: {source:"Qotp", color:'#808000'},
-//    driftLayer: {source:"Qgd", color:'#B8860B'},
-//};
-//        
-//        var geoJsonLayers = {};
+    var layerInfo = {
+        residuumLayer: {source:"Qr", color:'#FF7F50'}, 
+        alluviumLayer: {source:"Qal", color:'#9932CC'},
+        fanLayer: {source:"Qaf", color:'#FF6347'},
+        terraceLayer: {source:"Qat", color:'#F0E68C'},
+        colluviumLayer: {source:"Qc", color:'#D2B48C'}, 
+        fillLayer: {source:"af1", color:'#808080'},
+        oldAlluviumLayer: {source:"Qalo", color:'#FFFF00'},
+        outwashLayer: {source:"Qotp", color:'#808000'},
+        driftLayer: {source:"Qgd", color:'#B8860B'},
+    };
+        
+    var geoJsonLayers = {};
         
     $.getJSON("union_trimmed.geojson", function(data){
-        
-       L.geoJson( data, {
-            style: function(feature){
-              var fillColor,
-                  label = feature.properties.Label;
-            
-              if ( label == 'Qr' ) fillColor = "#FF7F50";
-              else if ( label == 'Qal' ) fillColor = "#9932CC";
-              else if ( label == 'Qaf' ) fillColor = "#FF6347";
-              else if ( label == 'Qat' ) fillColor = "#F0E68C"
-              else if ( label == 'Qc' ) fillColor = "#D2B48C";
-              else if ( label == 'af1' ) fillColor = "#808080";
-              else if ( label == 'Qalo' ) fillColor = "#FFFF00";
-              else if ( label == 'Qotp' ) fillColor = "#808000";
-              else if ( label == 'Qgd' ) fillColor = "#B8860B";
-              else fillColor = "#f7f7f7";  // no data
-              return { 
-                  color: "#999", 
-                  weight: 1, 
-                  fillColor: fillColor, 
-                  fillOpacity: .6 
-              };
-            }
+    
+       for (var layer in layerInfo) {
+           
+            geoJsonLayers[layer] = L.geoJson( data, {
+                style: function(feature){
+                  var fillColor,
+                      label = feature.properties.Label;
+
+                  if ( label == 'Qr' ) fillColor = "#FF7F50";
+                  else if ( label == 'Qal' ) fillColor = "#9932CC";
+                  else if ( label == 'Qaf' ) fillColor = "#FF6347";
+                  else if ( label == 'Qat' ) fillColor = "#F0E68C"
+                  else if ( label == 'Qc' ) fillColor = "#D2B48C";
+                  else if ( label == 'af1' ) fillColor = "#808080";
+                  else if ( label == 'Qalo' ) fillColor = "#FFFF00";
+                  else if ( label == 'Qotp' ) fillColor = "#808000";
+                  else if ( label == 'Qgd' ) fillColor = "#B8860B";
+                  else fillColor = "#f7f7f7";  // no data
+                  return { 
+                      color: "#999", 
+                      weight: 1, 
+                      fillColor: fillColor, 
+                      fillOpacity: .6 
+                  };
+                }
           
-        }).addTo(map);
+            }).addTo(map);
+           
+       }
+
+      
             
-//        var sourcesLabels = {
-//      "<b style='color:#FF7F50'>Residuum</b>": geoJsonLayers.residuumLayer,
-//      "<b style='color:#9932CC'>Alluvium</b>": geoJsonLayers.alluviumLayer,
-//      "<b style='color:#FF6347'>Alluvial Fan</b>": geoJsonLayers.fanLayer,
-//      "<b style='color:#F0E68C'>Terrace</b>": geoJsonLayers.terraceLayer,
-//      "<b style='color:#D2B48C'>Colluvium</b>": geoJsonLayers.colluviumLayer,
-//      "<b style='color:#808080'>Artificial Fill</b>": geoJsonLayers.fillLayer,
-//      "<b style='color:#FFFF00'>Older Alluvium</b>": geoJsonLayers.oldAlluviumLayer,
-//      "<b style='color:#808000'>Glacial Outwash</b>": geoJsonLayers.outwashLayer,
-//      "<b style='color:#B8860B'>Glacial Drift</b>": geoJsonLayers.driftLayer,
-//}
-//
-// L.control.layers(null, sourcesLabels, { collapsed:false }).addTo(map);
-//            
+        var sourcesLabels = {
+          "<b style='color:#FF7F50'>Residuum</b>": geoJsonLayers.residuumLayer,
+          "<b style='color:#9932CC'>Alluvium</b>": geoJsonLayers.alluviumLayer,
+          "<b style='color:#FF6347'>Alluvial Fan</b>": geoJsonLayers.fanLayer,
+          "<b style='color:#F0E68C'>Terrace</b>": geoJsonLayers.terraceLayer,
+          "<b style='color:#D2B48C'>Colluvium</b>": geoJsonLayers.colluviumLayer,
+          "<b style='color:#808080'>Artificial Fill</b>": geoJsonLayers.fillLayer,
+          "<b style='color:#FFFF00'>Older Alluvium</b>": geoJsonLayers.oldAlluviumLayer,
+          "<b style='color:#808000'>Glacial Outwash</b>": geoJsonLayers.outwashLayer,
+          "<b style='color:#B8860B'>Glacial Drift</b>": geoJsonLayers.driftLayer,
+        }
+
+      L.control.layers(null, sourcesLabels, { collapsed:false }).addTo(map);
+            
         });
 
         
