@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Union Surficial Geology</title>
+<!--    <title>Union Surficial Geology</title>-->
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -20,6 +20,7 @@
             font-family: Lato, sans-serif;
             color: #0D0000;
         }
+/*
         header {
             padding: 6px 10%;
         }
@@ -32,10 +33,11 @@
             display: inline-block;
             color: #001323;
         }
+*/
         #map {
-            width: 80%;
-            height: 540px;
-            margin: 10px auto;
+            width: 100%;
+            height: 1000px;
+            margin: 30px auto;
         }
         footer {
             padding: 6px 10%;
@@ -45,19 +47,60 @@
             font-size: 1em;
             color: #001323;
         }
+        #side-panel {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 33%;
+            background: whitesmoke;
+            border-right: 2px solid #1C9976;
+            overflow-y: scroll;
+}
+        h1 {
+            padding: 8px 25px 8px 15px;
+            margin: 0;
+            background: #1C9976;
+            color: whitesmoke;
+            font-weight: 400;
+            font-size: 1.5em;
+            text-align: left;
+        }
+        h2 {
+            margin: 0;
+            padding: 8px 25px 8px 15px;
+            color: #1C9976;
+            font-weight: 500;
+            font-size: 1.2em;
+            text-align: left;
+        }
+        #side-panel p {
+            margin: 8px 0 4px; 
+            padding: 0 25px 0 15px;
+            color: #1C9976;
+            text-align: left;
+            font-size: 1em; 
+        }
+        #side-panel p:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
     </style>
 </head>
 
 <body>
+<!--
     <header>
         <h1>Union Surficial Geology</h1>
         <h2>Surficial Geology of the Union, KY Quadrangle.</h2>
     </header>
-
+-->
     <div id='map'></div>
-
-    <footer>
-        <p>Map authored by Max Hammond III</p>
+    <div id='side-panel'>
+     <h1>Union Surficial Geology</h1>
+        <h2>Surficial Geology of the Union, KY Quadrangle.</h2>
+    <p>Map authored by Max Hammond III</p>
         <p>GEOLOGIC SUMMARY</p>
  
         <p>GEOLOGIC SETTING</p>
@@ -70,15 +113,16 @@
 <p>The units described on this map reflect natural processes collectively operating as a dynamic geomorphic system (Newell, 1978). The primary mechanisms of sediment transport and deposition in this area are flowing water (alluvial), glacial advances in the Pleistocene (glacial process), and gravity/mass-movement (colluvial processes), which are complexly interrelated. The map units in this area have been delineated based on the primary process generating the deposit or material. Soil survey maps and existing bedrock geologic maps served as the initial guide to mapping and these areas were modified through field identification, geomorphic setting, and well data. (Delineation and identification of all maps units is restricted by the map scale of 1:24,000).
 This map shows the distribution of surficial deposits of glacial drift (Qgd), glacial outwash (Qotp), residual soil (Qr), colluvium (Qc), alluvium (Qal), older alluvium (Qalo), alluvial fans (Qaf), alluvial terrace deposits (Qat), and artificial/engineered fill (af1). The distributions of these deposits are based on field observation, Natural Resource Conservation Service soil data, high resolution elevation data (LiDAR) and the geologic quadrangle map of Union.</p>
 <p>Glacial deposits occur in most of the quad, with the only exception being the southeast corner.  The Union quad has been effected by at least on Pre-Illinoisan glacial event. Points on the map indicate areas where some of the glacial evidence was found. The area is heavily industrialized making the locating of outcrops difficult. Mapping of the unit was based on previous work from the NRCS Soil Survey and from the presence of igneous and metamorphic rocks scattered through the area.
-Most of the alluvial deposits (Qal) occupy the Gunpowder and Big Bone Watersheds and parts of smaller tributary valleys.  Alluvial deposits at Big Bone Lick State Park are world renowned for the presence of Pleistocene mammal fossils.  The glacial influence is supported by remnants being eroded by the drainages of the area and various igneous boulders. Residual soil (Qr) mapped, primarily occurs on ridges and hilltops and in some small valleys with a low slope. There are glacial drift remnants in areas mapped as residuum, suggesting that glacial drift (Qgd) is widespread agross the area. This soil locally includes loess that overlies or is mixed with the residuum. The Kope shale weathers easily, slumping and producing colluvial soils (Qc) of variable thickness. Composition of the colluvium ranges from clayey (predominantly illite) and silty to coarse with abundant limestone slabs.</p>
-    </footer>
+    Most of the alluvial deposits (Qal) occupy the Gunpowder and Big Bone Watersheds and parts of smaller tributary valleys.  Alluvial deposits at Big Bone Lick State Park are world renowned for the presence of Pleistocene mammal fossils.  The glacial influence is supported by remnants being eroded by the drainages of the area and various igneous boulders. Residual soil (Qr) mapped, primarily occurs on ridges and hilltops and in some small valleys with a low slope. There are glacial drift remnants in areas mapped as residuum, suggesting that glacial drift (Qgd) is widespread agross the area. This soil locally includes loess that overlies or is mixed with the residuum. The Kope shale weathers easily, slumping and producing colluvial soils (Qc) of variable thickness. Composition of the colluvium ranges from clayey (predominantly illite) and silty to coarse with abundant limestone slabs.</p></div>
 
+    
+        
     <script src="union_trimmed.geojson"></script>
     <script>
 
        var map = L.map('map', {
-          center: [38.945,-84.68],
-          zoom: 10,
+          center: [38.945,-84.75],
+          zoom: 11,
       });
       
       var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
@@ -126,7 +170,7 @@ Most of the alluvial deposits (Qal) occupy the Gunpowder and Big Bone Watersheds
                       color: "#999", 
                       weight: 1, 
                       fillColor: fillColor, 
-                      fillOpacity: .6 
+                      fillOpacity: .4
                   };
                 },
                 onEachFeature : function(feature, layer) {
