@@ -93,6 +93,12 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             border-radius: 5px;
         }
+        .transparency-slider {
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            width: 250px;
+        }
     </style>
 </head>
 
@@ -122,13 +128,15 @@ This map shows the distribution of surficial deposits of glacial drift (Qgd), gl
 <p>Glacial deposits occur in most of the quad, with the only exception being the southeast corner.  The Union quad has been effected by at least on Pre-Illinoisan glacial event. Points on the map indicate areas where some of the glacial evidence was found. The area is heavily industrialized making the locating of outcrops difficult. Mapping of the unit was based on previous work from the NRCS Soil Survey and from the presence of igneous and metamorphic rocks scattered through the area.
     Most of the alluvial deposits (Qal) occupy the Gunpowder and Big Bone Watersheds and parts of smaller tributary valleys.  Alluvial deposits at Big Bone Lick State Park are world renowned for the presence of Pleistocene mammal fossils.  The glacial influence is supported by remnants being eroded by the drainages of the area and various igneous boulders. Residual soil (Qr) mapped, primarily occurs on ridges and hilltops and in some small valleys with a low slope. There are glacial drift remnants in areas mapped as residuum, suggesting that glacial drift (Qgd) is widespread agross the area. This soil locally includes loess that overlies or is mixed with the residuum. The Kope shale weathers easily, slumping and producing colluvial soils (Qc) of variable thickness. Composition of the colluvium ranges from clayey (predominantly illite) and silty to coarse with abundant limestone slabs.</p></div>
 
-    
+    <input type="range" min="0", max="1", 
+            value="1", step=".1" class="transparency-slider">
         
     <script src="union_trimmed.geojson"></script>
     <script>
 
        var map = L.map('map', {
           center: [38.945,-84.75],
+          zoomControl: false,
           zoom: 12,
           minZoom: 11,
           maxZoom: 20,
@@ -180,7 +188,7 @@ This map shows the distribution of surficial deposits of glacial drift (Qgd), gl
                       color: "#999", 
                       weight: 1, 
                       fillColor: fillColor, 
-                      fillOpacity: .8
+                      fillOpacity: 1
                   };
                 },
                 onEachFeature : function(feature, layer) {
@@ -216,8 +224,28 @@ This map shows the distribution of surficial deposits of glacial drift (Qgd), gl
 //        }
 //
 //      L.control.layers(null, sourcesLabels, { collapsed:false }).addTo(map);
-//            
+        
+        // select the slider
+        $('.transparency-slider').on('input change', function() {
+           
+            // get the current value
+            var currentTransparency = $(this).val();
+            
+            // loop through all your layers
+            for(layer in geoJsonLayers) {
+                
+                // set the layer opacity with current slider value
+                geoJsonLayers[layer].setStyle({
+                    fillOpacity: currentTransparency,
+                    opacity: currentTransparency
+                })
+            }
+            
+            
         });
+        
+        
+    });
 
         
         
